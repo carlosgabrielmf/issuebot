@@ -8,7 +8,7 @@ const test = () => {
 }
 
 export default async function Home() {
-  // const medusaTeam =  DeveloperFactory.medusaTeam();    
+  const medusaTeam =  DeveloperFactory.medusaTeam();    
   // const data = await main(['api'], 1, medusaTeam);
 
   // console.log(data);
