@@ -100,6 +100,13 @@ a {
   text-decoration: none;
 }
 
+Image{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
 @media  (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
