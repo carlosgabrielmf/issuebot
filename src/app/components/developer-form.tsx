@@ -41,8 +41,9 @@ const DeveloperForm: React.FC = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <section className={styles.section}>
+    <div className={styles.container}>
+      <form  className={styles.form} onSubmit={handleSubmit}>
         <label htmlFor="name">Developer Name:</label>
         <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} />
 
@@ -61,7 +62,8 @@ const DeveloperForm: React.FC = () => {
         <button type="submit">Submit</button>
       </form>
 
-      <table>
+<div className={styles.tablewrapper}>
+      <table className={styles.fltable}>
         <thead>
           <tr>
             <th>Name</th>
@@ -84,6 +86,8 @@ const DeveloperForm: React.FC = () => {
         </tbody>
       </table>
     </div>
+    </div>
+    </section>
   );
 };
 
