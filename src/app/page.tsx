@@ -3,6 +3,7 @@ import styles from './page.module.css'
 import { main } from './back-end/app'
 import { DeveloperFactory } from './back-end/developer/developer.factory';
 
+
 const test = () => {
 
 }
