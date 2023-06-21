@@ -211,6 +211,23 @@
   }
 }
 
+@media(max-width: 700px) {
+.wrapper {
+    flex-direction: column;
+    justify-content: normal;
+    padding: 2rem
+  }
+  .description .headingText {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .botImage {
+    width: 350px;
+    height: 350px;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   .vercelLogo {
     filter: invert(1);
