@@ -4,21 +4,22 @@ import styles from "./page.module.css";
 import { DeveloperFactory } from "./back-end/developer/developer.factory";
 import DeveloperForm from "./components/developer-form";
 import OpenAiIssuesResult from "./components/open-ai-issues-result";
+import { main } from './back-end/app'
 
 
 const test = () => {};
 
-const Page: React.FC = () => {
-  // const medusaTeam = DeveloperFactory.medusaTeam();
-  // const data = await main(['api'], 1, medusaTeam);
+const Page: React.FC = async () => {
+  const medusaTeam = DeveloperFactory.medusaTeam();
+  const data = await main(['api'], 1, medusaTeam);
 
-  // console.log(data);
+  console.log(data);
 
   return (
     <main className={styles.main}>
       {/* this is the header */}
       <div className={styles.wrapper}>
-        <OpenAiIssuesResult />
+        <OpenAiIssuesResult results={data} />
         <div className={styles.description}>
           <h1>Hello, there.</h1>
           <h2>

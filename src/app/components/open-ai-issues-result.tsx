@@ -8,13 +8,11 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { OpenAiResponse } from "../back-end/open-ai/open-ai.response";
 
-const OpenAiIssuesResult: React.FC<OpenAiResponse[]> = (
-  results: OpenAiResponse[]
-) => {
+const OpenAiIssuesResult: React.FC<{results: OpenAiResponse[]}> = (props) => {
   return (
     <div>
-      {results.map((result) => (
-        <>
+      {Array.from(props.results).map((result, index) => (
+        <div key={index}>
           <Typography variant="h5" component="div">
             {result.developer_name}
           </Typography>
@@ -31,7 +29,7 @@ const OpenAiIssuesResult: React.FC<OpenAiResponse[]> = (
               </CardActions>
             </Card>
           </Box>
-        </>
+        </div>
       ))}
     </div>
   );
