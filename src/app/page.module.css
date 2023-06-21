@@ -1,6 +1,6 @@
-.main {
+.wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 6rem;
@@ -9,6 +9,7 @@
 
 .description {
   display: inherit;
+  flex-direction: column;
   justify-content: inherit;
   align-items: inherit;
   font-size: 0.85rem;
@@ -18,14 +19,15 @@
   font-family: var(--font-mono);
 }
 
-.description a {
+.description h1 {
   display: flex;
+  font-size: 5rem;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
 }
 
-.description p {
+.description h2 {
   position: relative;
   margin: 0;
   padding: 1rem;
