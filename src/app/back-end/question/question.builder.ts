@@ -1,5 +1,5 @@
-import { Developer } from '../developer/developer.type';
-import { GithubIssuesResponse } from '../github-issues/github-issues.response';
+import { Developer } from '../developer/type/developer.type';
+import { GithubIssuesResponse } from '../github-issues/response/github-issues.response';
 
 export class QuestionBuilder {
     private _question: string;

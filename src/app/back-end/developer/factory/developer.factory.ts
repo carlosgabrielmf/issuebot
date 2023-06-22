@@ -1,6 +1,6 @@
-import { Developer } from './developer.type';
-import { DeveloperLevelEnum } from '../developer/enum/developer-level.enum';
-import { DeveloperRolEnum } from '..//developer/enum/developer-rol.enum';
+import { Developer } from '../type/developer.type';
+import { DeveloperLevelEnum } from '../enum/developer-level.enum';
+import { DeveloperRolEnum } from '../enum/developer-rol.enum';
 
 export class DeveloperFactory {
     static medusaTeam(): Developer[] {

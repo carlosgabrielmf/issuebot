@@ -6,8 +6,8 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { OpenAiResponse } from "../back-end/open-ai/open-ai.response";
-import { DeveloperFactory } from "../back-end/developer/developer.factory";
+import { OpenAiResponse } from "../back-end/open-ai/response/open-ai.response";
+import { DeveloperFactory } from "../back-end/developer/factory/developer.factory";
 
 type Issues = {
     title: string;
