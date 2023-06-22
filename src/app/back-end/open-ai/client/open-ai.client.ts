@@ -1,3 +1,4 @@
+"use client"
 import { Configuration, OpenAIApi } from 'openai';
 
 export class OpenAIApiClient {

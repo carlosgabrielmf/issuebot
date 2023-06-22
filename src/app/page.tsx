@@ -1,21 +1,16 @@
+"use client"
+import React from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
-import { DeveloperFactory } from "./back-end/developer/developer.factory";
-import React from "react";
 import DeveloperForm from "./components/developer-form";
-
-const test = () => {};
+import OpenAiIssuesResult from "./components/open-ai-issues-result";
 
 const Page: React.FC = () => {
-  // const medusaTeam = DeveloperFactory.medusaTeam();
-  // const data = await main(['api'], 1, medusaTeam);
-
-  // console.log(data);
-
   return (
     <main className={styles.main}>
       {/* this is the header */}
       <div className={styles.wrapper}>
+        <OpenAiIssuesResult />
         <div className={styles.description}>
           <h1>Hello, there.</h1>
           <h2>
