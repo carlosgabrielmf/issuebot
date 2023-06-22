@@ -16,8 +16,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const openai = new OpenAIApi(configuration);
     try {
         const developers = DeveloperFactory.medusaTeam();
-        const numberOfIssuesPerDeveloper = 1;
-        const gitHubIssues = await GithubApiClient.getGitHubIssues(['api']);
+        const numberOfIssuesPerDeveloper = 2;
+        const gitHubIssues = await GithubApiClient.getGitHubIssues();
     
         const questionBuilder = new QuestionBuilder(developers, gitHubIssues, numberOfIssuesPerDeveloper);
         const question = questionBuilder.question;

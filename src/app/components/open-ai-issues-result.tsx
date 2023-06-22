@@ -32,22 +32,22 @@ const OpenAiIssuesResult: React.FC = () => {
         <div>
             {Array.from(data).map((result, index) => (
                 <div key={index}>
-                <Typography variant="h5" component="div">
-                    {result.developer_name}
-                </Typography>
-                <Box>
-                    <Card sx={{ minWidth: 275 }}>
-                    <CardContent>
-                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        {result.title}
-                        </Typography>
-                        <Typography variant="body2">{""}</Typography>
-                    </CardContent>
-                    <CardActions>
-                        <Link href={result.url}><Button size="small">Ir a issue</Button></Link>
-                    </CardActions>
-                    </Card>
-                </Box>
+                    <Typography variant="h5" component="div">
+                        {result.developer}
+                    </Typography>
+                    <Box>
+                        <Card sx={{ minWidth: 275 }}>
+                        <CardContent>
+                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                            {result.title}
+                            </Typography>
+                            <Typography variant="body2">{""}</Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Link href={result.url} target="blank"><Button size="small">Check issue!</Button></Link>
+                        </CardActions>
+                        </Card>
+                    </Box>
                 </div>
             ))}
         </div>

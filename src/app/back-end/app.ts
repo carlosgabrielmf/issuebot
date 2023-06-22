@@ -9,7 +9,7 @@ import { FileRespository } from './resources/file.repository';
 
 export async function main(topics: string[], numberOfIssuesPerDeveloper: number, developers: Developer[]): Promise<OpenAiResponse[]> {
     try {
-        const gitHubIssues = await GithubApiClient.getGitHubIssues(topics);
+        const gitHubIssues = await GithubApiClient.getGitHubIssues();
         // FileRespository.saveGithubIssues(gitHubIssues);
     
         const questionBuilder = new QuestionBuilder(developers, gitHubIssues, numberOfIssuesPerDeveloper);
