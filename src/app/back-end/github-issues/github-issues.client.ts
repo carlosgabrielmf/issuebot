@@ -24,10 +24,8 @@ export class GithubApiClient {
         const response = await fetch(gitHubUrl);
         const data = (await response.json()) as GitHubIssueResponseRow;
     
-        const gitHubIssues = data.items.map((issue) => new GithubIssuesResponse(issue.html_url, issue.title, issue.body?.substring(0, 1000) ?? ''));
-    
-        FileRespository.saveGithubIssues(gitHubIssues);
-    
+        const gitHubIssues = data.items.map((issue) => new GithubIssuesResponse(issue.html_url, issue.title, issue.body?.substring(0, 200) ?? ''));
+        
         return gitHubIssues;
     }
 }

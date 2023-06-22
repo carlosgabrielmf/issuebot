@@ -1,25 +1,20 @@
-import React from "react";
+"use client"
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 import { DeveloperFactory } from "./back-end/developer/developer.factory";
 import DeveloperForm from "./components/developer-form";
 import OpenAiIssuesResult from "./components/open-ai-issues-result";
 import { main } from './back-end/app'
-
-
-const test = () => {};
+import { OpenAiResponse } from "./back-end/open-ai/open-ai.response";
+import { GithubApiClient } from "./back-end/github-issues/github-issues.client";
 
 const Page: React.FC = async () => {
-  const medusaTeam = DeveloperFactory.medusaTeam();
-  const data = await main(['api'], 1, medusaTeam);
-
-  console.log(data);
-
   return (
     <main className={styles.main}>
       {/* this is the header */}
       <div className={styles.wrapper}>
-        <OpenAiIssuesResult results={data} />
+        <OpenAiIssuesResult />
         <div className={styles.description}>
           <h1>Hello, there.</h1>
           <h2>

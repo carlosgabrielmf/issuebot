@@ -10,14 +10,14 @@ import { FileRespository } from './resources/file.repository';
 export async function main(topics: string[], numberOfIssuesPerDeveloper: number, developers: Developer[]): Promise<OpenAiResponse[]> {
     try {
         const gitHubIssues = await GithubApiClient.getGitHubIssues(topics);
-        FileRespository.saveGithubIssues(gitHubIssues);
+        // FileRespository.saveGithubIssues(gitHubIssues);
     
         const questionBuilder = new QuestionBuilder(developers, gitHubIssues, numberOfIssuesPerDeveloper);
         const question = questionBuilder.question;
-        FileRespository.saveOpenAiInput(question);
+        // FileRespository.saveOpenAiInput(question);
     
         const resultFromOpenAi = await OpenAIApiClient.getResult(question);
-        FileRespository.saveOpenAiOutput(resultFromOpenAi);
+        // FileRespository.saveOpenAiOutput(resultFromOpenAi);
     
         return resultFromOpenAi as unknown as OpenAiResponse[];
     } catch (error) {

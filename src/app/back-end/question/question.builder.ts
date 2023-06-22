@@ -10,7 +10,7 @@ export class QuestionBuilder {
 
     private build(developers: Developer[], githubIssues: GithubIssuesResponse[], numberOfIssuesPerDeveloper: number): string {
         const profiles = `Having the following developer ${developers.length} profiles: ${JSON.stringify(developers).toString()}. `;
-        const statement = 'Create only a JSON object as an output with elements which keys are: "developer_name", "title" and "url" ';
+        const statement = 'Create only a JSON object as an output with elements which keys are: "developer", "title" and "url" ';
         const conditions = [
             `match and assign only ${String(numberOfIssuesPerDeveloper)} GitHub issues for each developer`,
             'every developer should have a different issue assigned',
