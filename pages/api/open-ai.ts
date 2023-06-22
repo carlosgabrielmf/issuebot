@@ -1,5 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { DeveloperFactory } from "@/app/back-end/developer/developer.factory";
+import { Developer } from "@/app/back-end/developer/developer.type";
 import { GithubApiClient } from "@/app/back-end/github-issues/github-issues.client";
 import { OpenAIApiClient } from "@/app/back-end/open-ai/open-ai.client";
 import { OpenAiResponse } from "@/app/back-end/open-ai/open-ai.response";
@@ -7,7 +8,14 @@ import { QuestionBuilder } from "@/app/back-end/question/question.builder";
 import { NextApiRequest, NextApiResponse } from "next";
 import { Configuration, OpenAIApi } from "openai";
 
+type OpenAiRequest = {
+    number_issues_by_developers: number,
+    developers: Developer[]
+}
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+    if (req.method !== 'POST') {
+        res.status(405).json({ error: "Method Not Allowed" });
+    }
     const configuration = new Configuration({
         organization: process.env.OPENAI_API_ORGANIZATION,
         apiKey: process.env.OPENAI_API_KEY,
@@ -15,11 +23,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const openai = new OpenAIApi(configuration);
     try {
-        const developers = DeveloperFactory.medusaTeam();
-        const numberOfIssuesPerDeveloper = 4;
+        const request = req.body as OpenAiRequest;
+
         const gitHubIssues = await GithubApiClient.getGitHubIssues();
     
-        const questionBuilder = new QuestionBuilder(developers, gitHubIssues, numberOfIssuesPerDeveloper);
+        const questionBuilder = new QuestionBuilder(request.developers, gitHubIssues, request.number_issues_by_developers);
         const question = questionBuilder.question;
     
         const resultFromOpenAi = await OpenAIApiClient.getResult(question);

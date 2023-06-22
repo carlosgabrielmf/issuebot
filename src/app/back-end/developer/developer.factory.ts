@@ -1,37 +1,37 @@
-import { Developer } from '../developer/developer';
+import { Developer } from './developer.type';
 import { DeveloperLevelEnum } from '../developer/enum/developer-level.enum';
 import { DeveloperRolEnum } from '..//developer/enum/developer-rol.enum';
 
 export class DeveloperFactory {
     static medusaTeam(): Developer[] {
         return [
-            new Developer(
-                'Carlos',
-                DeveloperLevelEnum.JUNIOR,
-                DeveloperRolEnum.FRONTEND,
-                [
+            {
+                name: 'Carlos',
+                level: DeveloperLevelEnum.JUNIOR,
+                rol: DeveloperRolEnum.FRONTEND,
+                skills: [
                     'javascript',
                     'react',
                     'node',
                     'angular',
                     'express'
                 ]
-            ),
-            new Developer(
-                'Ana',
-                DeveloperLevelEnum.JUNIOR,
-                DeveloperRolEnum.FRONTEND,
-                [
+            },
+            {
+                name: 'Ana',
+                level: DeveloperLevelEnum.JUNIOR,
+                rol: DeveloperRolEnum.FRONTEND,
+                skills: [
                     'javascript',
                     'angular',
                     'react',
                 ]
-            ),
-            new Developer(
-                'Sandra',
-                DeveloperLevelEnum.JUNIOR,
-                DeveloperRolEnum.BACKEND,
-                [
+            },
+            {
+                name: 'Sandra',
+                level: DeveloperLevelEnum.JUNIOR,
+                rol: DeveloperRolEnum.BACKEND,
+                skills: [
                     'javascript',
                     'java',
                     'spring',
@@ -40,18 +40,18 @@ export class DeveloperFactory {
                     'sql',
                     'maven'
                 ]
-            ),
-            new Developer(
-                'Salva',
-                DeveloperLevelEnum.MIDDLE,
-                DeveloperRolEnum.BACKEND,
-                [
+            },
+            {
+                name: 'Salva',
+                level: DeveloperLevelEnum.MIDDLE,
+                rol: DeveloperRolEnum.BACKEND,
+                skills: [
                     'javascript',
                     'typescript',
                     'nestjs',
                     'vue',
                 ]
-            )
+            }
         ];
     }
 }

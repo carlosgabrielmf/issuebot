@@ -1,4 +1,4 @@
-import { Developer } from './developer/developer';
+import { Developer } from './developer/developer.type';
 import { DeveloperFactory } from './developer/developer.factory';
 import { GithubApiClient } from './github-issues/github-issues.client';
 import { OpenAIApiClient } from './open-ai/open-ai.client';

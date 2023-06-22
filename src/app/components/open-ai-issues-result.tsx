@@ -7,8 +7,7 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { OpenAiResponse } from "../back-end/open-ai/open-ai.response";
-import { title } from "process";
-import { url } from "inspector";
+import { DeveloperFactory } from "../back-end/developer/developer.factory";
 
 type Issues = {
     title: string;
@@ -21,13 +20,25 @@ type DevelopersIssues = {
 }
 
 const OpenAiIssuesResult: React.FC = () => {
-    const [data, setData] = useState<OpenAiResponse[]>([]);
     const [developerIssues, setDeveloperIssues] = useState<DevelopersIssues[]>([])
  
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`api/open-ai`);
+                const developers = DeveloperFactory.medusaTeam();
+                const data = {
+                    number_issues_by_developers: 4,
+                    developers: developers
+                };
+
+                const response = await fetch(`api/open-ai`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
                 if (response.ok) {
                     const jsonData = JSON.parse(await response.json());
                     const formattedResult = jsonData as unknown as OpenAiResponse[];
@@ -40,7 +51,6 @@ const OpenAiIssuesResult: React.FC = () => {
                             developerNames.push(element.developer)
                         }
                     })
-                    console.log(developerNames)
 
                     developerNames.forEach((name) => {
                         const issuesByDeveloperName = formattedResult.filter((result) => result.developer === name)
@@ -55,7 +65,6 @@ const OpenAiIssuesResult: React.FC = () => {
                     })
 
                     setDeveloperIssues(developers);
-                    console.log(developers);
                 }
             } catch (error) {
                 console.log(error);

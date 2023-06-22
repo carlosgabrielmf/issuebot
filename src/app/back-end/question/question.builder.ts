@@ -1,4 +1,4 @@
-import { Developer } from '../developer/developer';
+import { Developer } from '../developer/developer.type';
 import { GithubIssuesResponse } from '../github-issues/github-issues.response';
 
 export class QuestionBuilder {
