@@ -6,25 +6,26 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { OpenAiResponse } from "../back-end/open-ai/open-ai.response";
-import { DeveloperFactory } from "../back-end/developer/developer.factory";
-import { main } from "../back-end/app";
-import { Configuration, OpenAIApi } from "openai";
 
-const OpenAiIssuesResult: React.FC = async () => {
+const OpenAiIssuesResult: React.FC = () => {
     const [data, setData] = useState<OpenAiResponse[]>([]);
-
+ 
     useEffect(() => {
-        fetch(`http://localhost:3000/api/open-ai`)
-        .then((data) => {
-            if (data.ok) {
-                data.json().then((data) => {
-                    setData(data as OpenAiResponse[]);
-                    console.log(data)
-                })
+        const fetchData = async () => {
+            try {
+                const response = await fetch("http://localhost:3000/api/open-ai");
+                if (response.ok) {
+                    const jsonData = await response.json();
+                    setData(jsonData as unknown as OpenAiResponse[]);
+                    console.log(jsonData);
+                }
+            } catch (error) {
+                console.log(error);
             }
-        })
-        .catch((error) => console.log(error))
-    }, [])
+        };
+ 
+        fetchData();
+    }, []);
 
     return (
         <div>

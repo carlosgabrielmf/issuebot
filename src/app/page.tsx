@@ -1,15 +1,11 @@
 "use client"
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
-import { DeveloperFactory } from "./back-end/developer/developer.factory";
 import DeveloperForm from "./components/developer-form";
 import OpenAiIssuesResult from "./components/open-ai-issues-result";
-import { main } from './back-end/app'
-import { OpenAiResponse } from "./back-end/open-ai/open-ai.response";
-import { GithubApiClient } from "./back-end/github-issues/github-issues.client";
 
-const Page: React.FC = async () => {
+const Page: React.FC = () => {
   return (
     <main className={styles.main}>
       {/* this is the header */}
