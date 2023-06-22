@@ -16,7 +16,7 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Paper
+  Paper,
 } from "@mui/material";
 
 interface FormData {
@@ -79,70 +79,95 @@ const DeveloperForm: React.FC = () => {
   };
 
   return (
-      <form onSubmit={handleSubmit}>
-        <div style={{ backgroundColor: 'white', borderRadius: '5px', width: "90%" }}>
-          {/* Enabezado */}
-          <Typography
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              padding: '1rem',
-            }}
-            variant="h3"
-          >
-            Find the issues. Good Luck!
-          </Typography>
-          <Divider
-            sx={{
-              height: '0.5rem',
-              borderBottom: '2px solid',
-              marginBottom: '1rem',
-            }}
+    <form onSubmit={handleSubmit}>
+      <div
+        style={{ backgroundColor: "white", borderRadius: "5px", width: "90%" }}
+      >
+        {/* Enabezado */}
+        <Typography
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            padding: "1rem",
+          }}
+          variant="h3"
+        >
+          Find the issues. Good Luck!
+        </Typography>
+        <Divider
+          sx={{
+            height: "0.5rem",
+            borderBottom: "2px solid",
+            marginBottom: "1rem",
+          }}
+        />
+        {/* Campos de entrada del formulario */}
+        <FormControl sx={{ width: "100%", p: 2 }}>
+          <TextField
+            sx={{ my: "0.5rem" }}
+            fullWidth
+            required
+            name="name"
+            label="Developer name"
+            variant="filled"
+            value={formData.name}
           />
-          {/* Campos de entrada del formulario */}
-          <FormControl sx={{ width: '100%', p: 2 }}>
-            <TextField
-              sx={{ my: '0.5rem' }}
-              fullWidth
-              required
-              name="country"
-              label="XXX"
-              variant="filled"
-            />
-            <TextField
-              sx={{ my: '0.5rem' }}
-              fullWidth
-              required
-              name="email"
-              label="XXXX"
-              variant="filled"
-            />
-            <TextField
-              sx={{ my: '0.5rem' }}
-              fullWidth
-              required
-              name="phone"
-              label="XXXXX"
-              variant="filled"
-            />
-            <Select
-              fullWidth
-              required
-              label="Select"
-              name="company_type"
-            >
-              {/* Opciones del selector */}
-              <MenuItem value="ftl_ltl">Front</MenuItem>
-              <MenuItem value="navieras">Back</MenuItem>
-              <MenuItem value="aereas">Full-Stack</MenuItem>
-            </Select>
-            {/* Botón de envío */}
-            <Button sx={{ my: '0.5rem' }} fullWidth type="submit" variant="contained">
-              Search
-            </Button>
-          </FormControl>
-        </div>
-        <TableContainer sx={{width: "90%"}} component={Paper}>
+        </FormControl>
+        <FormControl sx={{ width: "100%", p: 2 }}>
+          <InputLabel id="label-level">Level</InputLabel>
+          <Select
+            fullWidth
+            required
+            labelId="label-level"
+            // label="Level"
+            name="level"
+            value={formData.level}
+          >
+            {/* Opciones del selector */}
+            <MenuItem value="junior">Junior</MenuItem>
+            <MenuItem value="middle">Middle</MenuItem>
+            <MenuItem value="senior">Senior</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ width: "100%", p: 2 }}>
+          <InputLabel id="label-role">Role</InputLabel>
+          <Select
+            fullWidth
+            required
+            labelId="label-role"
+            // label="Role"
+            name="role"
+            value={formData.role}
+          >
+            {/* Opciones del selector */}
+            <MenuItem value="front-end">Front End</MenuItem>
+            <MenuItem value="back-end">Back End</MenuItem>
+            <MenuItem value="full-stack">Full-Stack</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ width: "100%", p: 2 }}>
+          <TextField
+            sx={{ my: "0.5rem" }}
+            fullWidth
+            id="standard-multiline-static"
+            label="Skills"
+            multiline
+            rows={4}
+            defaultValue="javascript, typescript"
+            variant="standard"
+          />
+          {/* Botón de envío */}
+          <Button
+            sx={{ my: "0.5rem" }}
+            fullWidth
+            type="submit"
+            variant="contained"
+          >
+            Add developer
+          </Button>
+        </FormControl>
+      </div>
+      <TableContainer sx={{ width: "90%" }} component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
@@ -152,15 +177,15 @@ const DeveloperForm: React.FC = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-              <TableRow>
-                <TableCell>x</TableCell>
-                <TableCell>x</TableCell>
-                <TableCell>x</TableCell>
-              </TableRow>
+            <TableRow>
+              <TableCell>x</TableCell>
+              <TableCell>x</TableCell>
+              <TableCell>x</TableCell>
+            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
-      </form>
+    </form>
   );
 };
 
