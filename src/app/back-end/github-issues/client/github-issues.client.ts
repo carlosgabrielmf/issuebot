@@ -1,6 +1,5 @@
 import fetch from 'node-fetch';
 import { GithubIssuesResponse } from '../response/github-issues.response';
-import { FileRespository } from '../../resources/file.repository';
 
 interface GitHubIssueResponseRow {
     items: [
