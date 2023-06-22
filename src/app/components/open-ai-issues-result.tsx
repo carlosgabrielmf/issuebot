@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
@@ -15,7 +16,7 @@ const OpenAiIssuesResult: React.FC = () => {
             try {
                 const response = await fetch("http://localhost:3000/api/open-ai");
                 if (response.ok) {
-                    const jsonData = await response.json();
+                    const jsonData = JSON.parse(await response.json());
                     setData(jsonData as unknown as OpenAiResponse[]);
                     console.log(jsonData);
                 }
@@ -43,7 +44,7 @@ const OpenAiIssuesResult: React.FC = () => {
                         <Typography variant="body2">{""}</Typography>
                     </CardContent>
                     <CardActions>
-                        <Button size="small">{result.url}</Button>
+                        <Link href={result.url}><Button size="small">Ir a issue</Button></Link>
                     </CardActions>
                     </Card>
                 </Box>
