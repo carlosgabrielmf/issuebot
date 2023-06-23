@@ -1,8 +1,24 @@
 "use client";
 import React, { FormEvent, useState } from "react";
-import Button from "@mui/material/Button";
 import styles from "../page.module.css";
 import OpenAiIssuesResult from "./open-ai-issues-result";
+import {
+  Typography,
+  TextField,
+  Button,
+  FormControl,
+  Select,
+  InputLabel,
+  MenuItem,
+  Divider,
+  Table,
+  TableContainer,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  Paper,
+} from "@mui/material";
 
 export interface Developer {
   name: string;
@@ -21,6 +37,25 @@ const DeveloperForm: React.FC = () => {
     role: "",
     skills: ""
   });
+
+  const role = [
+    {
+      value: "Select",
+      label: "Select",
+    },
+    {
+      value: "Frontend",
+      label: "Frontend",
+    },
+    {
+      value: "Backend",
+      label: "Backend",
+    },
+    {
+      value: "Full-Stack",
+      label: "Full-Stack",
+    },
+  ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,88 +85,114 @@ const DeveloperForm: React.FC = () => {
   }
 
   return (
-    <section className={styles.section}>
-      <div className={styles.container}>
-        <h2
-          style={{
-            fontSize: "1.7rem",
+    <form onSubmit={handleSubmit}>
+      <div
+        style={{ backgroundColor: "white", borderRadius: "5px", width: "90%" }}
+      >
+        {/* Enabezado */}
+        <Typography
+          sx={{
             display: "flex",
-            alignItems: "center",
             justifyContent: "center",
             padding: "1rem",
           }}
-          className={styles.description}>
+          variant="h3"
+        >
           Find the issues. Good Luck!
-        </h2>
-        <hr style={{color: "rgba(1, 65, 255, 0.3)"}}/>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <label htmlFor="name">Developer Name:</label>
-          <input
-            type="text"
-            id="name"
+        </Typography>
+        <Divider
+          sx={{
+            height: "0.5rem",
+            borderBottom: "2px solid",
+            marginBottom: "1rem",
+          }}
+        />
+        {/* Campos de entrada del formulario */}
+        <FormControl sx={{ width: "100%", p: 2 }}>
+          <TextField
+            sx={{ my: "0.5rem" }}
+            fullWidth
+            required
             name="name"
-            value={developer.name}
+            label="Developer name"
+            variant="filled"
+            value={formData.name}
             onChange={handleChange}
           />
-
-          <label htmlFor="level">Level:</label>
-          <input
-            type="text"
-            id="level"
+        </FormControl>
+        <FormControl sx={{ width: "100%", p: 2 }}>
+          <InputLabel id="label-level">Level</InputLabel>
+          <Select
+            fullWidth
+            required
+            labelId="label-level"
+            // label="Level"
             name="level"
-            value={developer.level}
-            onChange={handleChange}
-          />
-
-          <label htmlFor="role">Role:</label>
-          <input
-            type="text"
-            id="role"
+            value={formData.level}
+          >
+            {/* Opciones del selector */}
+            <MenuItem value="junior">Junior</MenuItem>
+            <MenuItem value="middle">Middle</MenuItem>
+            <MenuItem value="senior">Senior</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ width: "100%", p: 2 }}>
+          <InputLabel id="label-role">Role</InputLabel>
+          <Select
+            fullWidth
+            required
+            labelId="label-role"
+            // label="Role"
             name="role"
-            value={developer.role}
-            onChange={handleChange}
+            value={formData.role}
+          >
+            {/* Opciones del selector */}
+            <MenuItem value="front-end">Front End</MenuItem>
+            <MenuItem value="back-end">Back End</MenuItem>
+            <MenuItem value="full-stack">Full-Stack</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ width: "100%", p: 2 }}>
+          <TextField
+            sx={{ my: "0.5rem" }}
+            fullWidth
+            id="standard-multiline-static"
+            label="Skills"
+            multiline
+            rows={4}
+            defaultValue="javascript, typescript"
+            variant="standard"
           />
-
-          <label htmlFor="skills">Skills:</label>
-          <textarea
-            id="skills"
-            name="skills"
-            value={developer.skills}
-            onChange={handleChange}
-          />
-          <button type="submit">Add developer</button>
-        </form>
-
-        <div className={styles.tablewrapper}>
-          <table className={styles.fltable}>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Level</th>
-                <th>Role</th>
-                <th>Skills</th>
-              </tr>
-            </thead>
-            <tbody>
-              {developers.map((developer, index) => (
-                <tr key={index}>
-                  <td>{developer.name}</td>
-                  <td>{developer.level}</td>
-                  <td>{developer.role}</td>
-                  <td>{developer.skills}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className={styles.center}>
-          <Button disabled={developers.length===0} variant="contained" size="small" onClick={handleOnClick}>Search issues</Button>
-        </div>
-        <div className={styles.center}>
-          <OpenAiIssuesResult developers={developers} searchFlag={search} />
-        </div>
+          {/* Botón de envío */}
+          <Button
+            sx={{ my: "0.5rem" }}
+            fullWidth
+            type="submit"
+            variant="contained"
+          >
+            Add developer
+          </Button>
+        </FormControl>
       </div>
-    </section>
+      <TableContainer sx={{ width: "90%" }} component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Quantity</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>x</TableCell>
+              <TableCell>x</TableCell>
+              <TableCell>x</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </form>
   );
 };
 
