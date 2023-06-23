@@ -1,12 +1,9 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { DeveloperFactory } from "@/app/back-end/developer/factory/developer.factory";
 import { Developer } from "@/app/back-end/developer/type/developer.type";
 import { GithubApiClient } from "@/app/back-end/github-issues/client/github-issues.client";
 import { OpenAIApiClient } from "@/app/back-end/open-ai/client/open-ai.client";
-import { OpenAiResponse } from "@/app/back-end/open-ai/response/open-ai.response";
 import { QuestionBuilder } from "@/app/back-end/question/question.builder";
 import { NextApiRequest, NextApiResponse } from "next";
-import { Configuration, OpenAIApi } from "openai";
 
 type OpenAiRequest = {
     number_issues_by_developers: number,

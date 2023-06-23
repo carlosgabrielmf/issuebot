@@ -25,7 +25,7 @@ type DevelopersIssues = {
     issues: Issues[]
 }
 
-const OpenAiIssuesResult: React.FC<{developers: DeveloperForm[], searchFlag: boolean}> = (props) => {
+const OpenAiIssuesResult: React.FC<{developers: DeveloperForm[], searchFlag: boolean, numberOfIssues: number}> = (props) => {
     const [developerIssues, setDeveloperIssues] = useState<DevelopersIssues[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
  
@@ -43,7 +43,7 @@ const OpenAiIssuesResult: React.FC<{developers: DeveloperForm[], searchFlag: boo
                 })
 
                 const data = {
-                    number_issues_by_developers: 4,
+                    number_issues_by_developers: props.numberOfIssues,
                     developers: developers
                 };
 

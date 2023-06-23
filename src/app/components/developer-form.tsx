@@ -29,6 +29,7 @@ export interface Developer {
 
 const DeveloperForm: React.FC = () => {
   const [search, setSearch] = useState<boolean>(false);
+  const [numberOfIssues, setNumberOfIssues] = useState<number>(1);
 
   const [developers, setDevelopers] = useState<Developer[]>([]);
   const [developer, setDeveloper] = useState<Developer>({
@@ -59,6 +60,8 @@ const DeveloperForm: React.FC = () => {
     }));
   };
 
+  const handleChangeNumberOfIssues = (event: React.ChangeEvent<HTMLSelectElement>) => setNumberOfIssues(Number(event.target.value))
+
   const handleOnClick = () => {
     if (developers.length > 0) {
       setSearch(true);
@@ -79,6 +82,15 @@ const DeveloperForm: React.FC = () => {
           className={styles.description}>
           Find the issues. Good Luck!
         </h2>
+        <div className={styles.center}>
+          <label htmlFor="number-of-issues">Number of issues per dev:&nbsp;</label>
+          <select id="number-of-issues" name="number-of-issues" defaultValue={1} value={numberOfIssues} onChange={handleChangeNumberOfIssues}>
+            <option value="1"> 1 </option>
+            <option value="2"> 2 </option>
+            <option value="3"> 3 </option>
+            <option value="4"> 4 </option>
+          </select>
+        </div>
         <hr style={{color: "rgba(1, 65, 255, 0.3)"}}/>
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.formComponent}>
@@ -149,7 +161,7 @@ const DeveloperForm: React.FC = () => {
           <Button disabled={developers.length===0||search} variant="contained" size="small" onClick={handleOnClick}>Search issues</Button>
         </div>
         <div className={styles.center}>
-          <OpenAiIssuesResult developers={developers} searchFlag={search} />
+          <OpenAiIssuesResult developers={developers} searchFlag={search} numberOfIssues={numberOfIssues} />
         </div>
       </div>
     </section>
