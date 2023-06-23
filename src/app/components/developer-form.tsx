@@ -125,7 +125,9 @@ const DeveloperForm: React.FC = () => {
           </table>
         </div>
         <div className={styles.center}>
-          <Button variant="contained" size="small" onClick={handleOnClick}>Search issues</Button>
+          <Button disabled={developers.length===0} variant="contained" size="small" onClick={handleOnClick}>Search issues</Button>
+        </div>
+        <div className={styles.center}>
           <OpenAiIssuesResult developers={developers} searchFlag={search} />
         </div>
       </div>

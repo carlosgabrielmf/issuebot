@@ -33,6 +33,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const question = questionBuilder.question;
     
         const resultFromOpenAi = await OpenAIApiClient.getResult(question);
+
+        if (resultFromOpenAi.includes('a language model AI')) {
+            res.status(404).json({ error: "Open AI call failed" });
+        }
+
         const json = JSON.parse(resultFromOpenAi);
         console.log(json);
         res.status(200).json(json);

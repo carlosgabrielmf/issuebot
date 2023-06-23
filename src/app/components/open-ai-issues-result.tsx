@@ -6,6 +6,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import CircularProgress from '@mui/material/CircularProgress';
 import { OpenAiResponse } from "../back-end/open-ai/response/open-ai.response";
 import { DeveloperFactory } from "../back-end/developer/factory/developer.factory";
 import { Developer as DeveloperForm } from "./developer-form";
@@ -25,10 +26,12 @@ type DevelopersIssues = {
 
 const OpenAiIssuesResult: React.FC<{developers: DeveloperForm[], searchFlag: boolean}> = (props) => {
     const [developerIssues, setDeveloperIssues] = useState<DevelopersIssues[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
  
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setLoading(true);
                 const developers: Developer[] = props.developers.map((developer) => {
                     return {
                         name: developer.name,
@@ -78,41 +81,50 @@ const OpenAiIssuesResult: React.FC<{developers: DeveloperForm[], searchFlag: boo
 
                     setDeveloperIssues(developers);
                 }
+
+                setLoading(false);
             } catch (error) {
                 console.log(error);
+                setLoading(false);
             }
         };
  
         if (props.searchFlag) {
             fetchData();
         }
-    }, [props.searchFlag]);
+    }, [props]);
 
+    let loadingComponent; 
+    if (loading) {
+        loadingComponent = <Box sx={{ display: 'flex' }}><CircularProgress /></Box>
+    }
     return (
-        <div>
+        <Box>
+            {loadingComponent}
             {Array.from(developerIssues).map((developer, index) => (
                 <div key={index}>
-                    <Typography variant="h5" component="div">
+                    <Typography variant="h5" component="div" align="center">
                         {developer.name}
                     </Typography>
                     {Array.from(developer.issues).map((issues, index) => (
-                        <Box key={index}>
+                        <Box key={index} component="div" sx={{ p: 2 }}>
                             <Card sx={{ minWidth: 275 }}>
-                            <CardContent>
-                                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                {issues.title}
-                                </Typography>
-                                <Typography variant="body2">{""}</Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Link href={issues.url} target="blank"><Button size="small">Check issue!</Button></Link>
-                            </CardActions>
+                                <CardContent>
+                                    <Typography sx={{ mb: 1.5 }}>
+                                        {issues.title}
+                                    </Typography>
+                                    <CardActions>
+                                        <Typography align="center">
+                                            <Link href={issues.url} target="blank"><Button size="small">🧐 Check issue!</Button></Link>
+                                        </Typography>
+                                    </CardActions>
+                                </CardContent>
                             </Card>
                         </Box>
                     ))}
                 </div>
             ))}
-        </div>
+        </Box>
     );
 };
 

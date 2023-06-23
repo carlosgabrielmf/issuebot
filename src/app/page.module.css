@@ -92,7 +92,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: 4rem 0;
+  padding: 2rem 0;
 }
 
 .center::before {
@@ -305,7 +305,7 @@
 }
 
 .tablewrapper{
-  margin: 10px 70px 70px;
+  margin: 10px 70px;
   box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
 }
 .fltable {
