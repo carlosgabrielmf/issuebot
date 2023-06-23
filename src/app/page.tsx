@@ -51,7 +51,7 @@ const Page: React.FC = () => {
           </ul>
         </div>
       </div>
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div className={styles.formSection}>
         <Image src="/assets/3.png" alt="Bot Finding" width={350} height={350} />
         <DeveloperForm />
       </div>

@@ -7,6 +7,7 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CircularProgress from '@mui/material/CircularProgress';
+import styles from "./../page.module.css";
 import { OpenAiResponse } from "../back-end/open-ai/response/open-ai.response";
 import { DeveloperFactory } from "../back-end/developer/factory/developer.factory";
 import { Developer as DeveloperForm } from "./developer-form";
@@ -96,7 +97,7 @@ const OpenAiIssuesResult: React.FC<{developers: DeveloperForm[], searchFlag: boo
 
     let loadingComponent; 
     if (loading) {
-        loadingComponent = <Box sx={{ display: 'flex' }}><CircularProgress /></Box>
+        loadingComponent = <div className={styles.center}><Box sx={{ display: 'flex' }}><CircularProgress /></Box></div>
     }
     return (
         <Box>

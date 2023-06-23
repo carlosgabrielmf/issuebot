@@ -1,10 +1,10 @@
 .wrapper {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  padding: 2rem;
-  min-height: 60vh;
+  padding: 1rem;
+  min-height: 15vh;
 }
 
 .description{
@@ -40,9 +40,9 @@
   display: flex;
   position: relative;
   text-align: left;
-  padding: 2.5rem;
+  padding: 1.5rem;
   width: 50%;
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
   margin-top: 1rem;
   background-color: rgba(var(--callout-rgb), 0.5);
   border: 1px solid rgba(var(--callout-border-rgb), 0.3);
@@ -95,13 +95,6 @@
   padding: 2rem 0;
 }
 
-.center::before {
-  background: var(--secondary-glow);
-  border-radius: 50%;
-  width: 480px;
-  height: 360px;
-  margin-left: -400px;
-}
 
 .center::after {
   background: var(--primary-glow);
@@ -253,7 +246,7 @@
   display: flex;
   justify-content: space-around;
   font-size: 1rem;
-  width: 100vw;
+  width: 60vw;
   height: 90%;
   font-family: var(--font-mono);
  margin: 20px;
@@ -264,6 +257,18 @@
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
+  flex-direction: column;
+}
+
+.formSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.formComponent {
+  display: flex;
+  flex-wrap: nowrap;
   flex-direction: column;
 }
 
@@ -278,7 +283,6 @@
 
 .form input[type="text"],
 .form textarea {
-  width: 95%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -316,7 +320,6 @@
   border-collapse: collapse;
   width: 100%;
   max-width: 100%;
-  white-space: nowrap;
   background-color: white;
 }
 .fltable td, .fltable th {

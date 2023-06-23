@@ -33,29 +33,10 @@ const DeveloperForm: React.FC = () => {
   const [developers, setDevelopers] = useState<Developer[]>([]);
   const [developer, setDeveloper] = useState<Developer>({
     name: "",
-    level: "",
-    role: "",
+    level: "junior",
+    role: "back-end",
     skills: ""
   });
-
-  const role = [
-    {
-      value: "Select",
-      label: "Select",
-    },
-    {
-      value: "Frontend",
-      label: "Frontend",
-    },
-    {
-      value: "Backend",
-      label: "Backend",
-    },
-    {
-      value: "Full-Stack",
-      label: "Full-Stack",
-    },
-  ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,7 +50,7 @@ const DeveloperForm: React.FC = () => {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setDeveloper((prevData) => ({
@@ -85,114 +66,93 @@ const DeveloperForm: React.FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div
-        style={{ backgroundColor: "white", borderRadius: "5px", width: "90%" }}
-      >
-        {/* Enabezado */}
-        <Typography
-          sx={{
+    <section className={styles.section}>
+      <div className={styles.container}>
+        <h2
+          style={{
+            fontSize: "1.7rem",
             display: "flex",
+            alignItems: "center",
             justifyContent: "center",
             padding: "1rem",
           }}
-          variant="h3"
-        >
+          className={styles.description}>
           Find the issues. Good Luck!
-        </Typography>
-        <Divider
-          sx={{
-            height: "0.5rem",
-            borderBottom: "2px solid",
-            marginBottom: "1rem",
-          }}
-        />
-        {/* Campos de entrada del formulario */}
-        <FormControl sx={{ width: "100%", p: 2 }}>
-          <TextField
-            sx={{ my: "0.5rem" }}
-            fullWidth
-            required
-            name="name"
-            label="Developer name"
-            variant="filled"
-            value={formData.name}
-            onChange={handleChange}
-          />
-        </FormControl>
-        <FormControl sx={{ width: "100%", p: 2 }}>
-          <InputLabel id="label-level">Level</InputLabel>
-          <Select
-            fullWidth
-            required
-            labelId="label-level"
-            // label="Level"
-            name="level"
-            value={formData.level}
-          >
-            {/* Opciones del selector */}
-            <MenuItem value="junior">Junior</MenuItem>
-            <MenuItem value="middle">Middle</MenuItem>
-            <MenuItem value="senior">Senior</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl sx={{ width: "100%", p: 2 }}>
-          <InputLabel id="label-role">Role</InputLabel>
-          <Select
-            fullWidth
-            required
-            labelId="label-role"
-            // label="Role"
-            name="role"
-            value={formData.role}
-          >
-            {/* Opciones del selector */}
-            <MenuItem value="front-end">Front End</MenuItem>
-            <MenuItem value="back-end">Back End</MenuItem>
-            <MenuItem value="full-stack">Full-Stack</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl sx={{ width: "100%", p: 2 }}>
-          <TextField
-            sx={{ my: "0.5rem" }}
-            fullWidth
-            id="standard-multiline-static"
-            label="Skills"
-            multiline
-            rows={4}
-            defaultValue="javascript, typescript"
-            variant="standard"
-          />
-          {/* Botón de envío */}
-          <Button
-            sx={{ my: "0.5rem" }}
-            fullWidth
-            type="submit"
-            variant="contained"
-          >
-            Add developer
-          </Button>
-        </FormControl>
+        </h2>
+        <hr style={{color: "rgba(1, 65, 255, 0.3)"}}/>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.formComponent}>
+            <label htmlFor="name">Developer Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              value={developer.name}
+              onChange={handleChange}
+            />
+          </div>
+          
+          <div className={styles.formComponent}>
+              <label htmlFor="level">Level</label>
+              <select id="level" defaultValue="junior" name="level" value={developer.level} onChange={handleChange}>
+                <option value="junior"> Junior </option>
+                <option value="middle"> Middle </option>
+                <option value="senior"> Senior </option>
+              </select>
+              <br/>
+              <label htmlFor="role">Role</label>
+              <select id="role" name="role" defaultValue="back-end" value={developer.role} onChange={handleChange}>
+                <option value="back-end"> Back-end </option>
+                <option value="front-end"> Front-end </option>
+                <option value="full-stack"> Full-stack </option>
+            </select>
+            <br/>
+          </div>
+
+          <div className={styles.formComponent}>
+            <label htmlFor="skills">Skills:</label>
+            <textarea
+              id="skills"
+              name="skills"
+              value={developer.skills}
+              required
+              onChange={handleChange}
+            />
+          </div>
+          <button disabled={search} type="submit">Add developer</button>
+        </form>
+
+        <div className={styles.tablewrapper}>
+          <table className={styles.fltable}>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Level</th>
+                <th>Role</th>
+                <th>Skills</th>
+              </tr>
+            </thead>
+            <tbody>
+              {developers.map((developer, index) => (
+                <tr key={index}>
+                  <td>{developer.name}</td>
+                  <td>{developer.level}</td>
+                  <td>{developer.role}</td>
+                  <td>{developer.skills}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className={styles.center}>
+          <Button disabled={developers.length===0||search} variant="contained" size="small" onClick={handleOnClick}>Search issues</Button>
+        </div>
+        <div className={styles.center}>
+          <OpenAiIssuesResult developers={developers} searchFlag={search} />
+        </div>
       </div>
-      <TableContainer sx={{ width: "90%" }} component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Quantity</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <TableRow>
-              <TableCell>x</TableCell>
-              <TableCell>x</TableCell>
-              <TableCell>x</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </form>
+    </section>
   );
 };
 
