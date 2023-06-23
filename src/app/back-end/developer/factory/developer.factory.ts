@@ -1,6 +1,6 @@
 import { Developer } from '../type/developer.type';
 import { DeveloperLevelEnum } from '../enum/developer-level.enum';
-import { DeveloperRolEnum } from '../enum/developer-role.enum';
+import { DeveloperRoleEnum } from '../enum/developer-role.enum';
 
 export class DeveloperFactory {
     static medusaTeam(): Developer[] {
@@ -8,7 +8,7 @@ export class DeveloperFactory {
             {
                 name: 'Carlos',
                 level: DeveloperLevelEnum.JUNIOR,
-                role: DeveloperRolEnum.FRONTEND,
+                role: DeveloperRoleEnum.FRONTEND,
                 skills: [
                     'javascript',
                     'react',
@@ -20,7 +20,7 @@ export class DeveloperFactory {
             {
                 name: 'Ana',
                 level: DeveloperLevelEnum.JUNIOR,
-                role: DeveloperRolEnum.FRONTEND,
+                role: DeveloperRoleEnum.FRONTEND,
                 skills: [
                     'javascript',
                     'angular',
@@ -30,7 +30,7 @@ export class DeveloperFactory {
             {
                 name: 'Sandra',
                 level: DeveloperLevelEnum.JUNIOR,
-                role: DeveloperRolEnum.BACKEND,
+                role: DeveloperRoleEnum.BACKEND,
                 skills: [
                     'javascript',
                     'java',
@@ -44,7 +44,7 @@ export class DeveloperFactory {
             {
                 name: 'Salva',
                 level: DeveloperLevelEnum.MIDDLE,
-                role: DeveloperRolEnum.BACKEND,
+                role: DeveloperRoleEnum.BACKEND,
                 skills: [
                     'javascript',
                     'typescript',
