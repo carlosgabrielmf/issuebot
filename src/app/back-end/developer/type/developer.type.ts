@@ -1,9 +1,9 @@
 import { DeveloperLevelEnum } from '../enum/developer-level.enum';
-import { DeveloperRolEnum } from '../enum/developer-rol.enum';
+import { DeveloperRoleEnum } from '../enum/developer-role.enum';
 
 export type Developer = {
     name: string;
     level: DeveloperLevelEnum;
-    rol : DeveloperRolEnum;
+    role : DeveloperRoleEnum;
     skills: string[];
 }

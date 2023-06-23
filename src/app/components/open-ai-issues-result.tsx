@@ -8,6 +8,10 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { OpenAiResponse } from "../back-end/open-ai/response/open-ai.response";
 import { DeveloperFactory } from "../back-end/developer/factory/developer.factory";
+import { Developer as DeveloperForm } from "./developer-form";
+import { Developer } from "../back-end/developer/type/developer.type";
+import { getDeveloperLevelEnumFromString } from "../back-end/developer/enum/developer-level.enum";
+import { getDeveloperRoleEnumFromString } from "../back-end/developer/enum/developer-role.enum";
 
 type Issues = {
     title: string;
@@ -19,13 +23,21 @@ type DevelopersIssues = {
     issues: Issues[]
 }
 
-const OpenAiIssuesResult: React.FC = () => {
-    const [developerIssues, setDeveloperIssues] = useState<DevelopersIssues[]>([])
+const OpenAiIssuesResult: React.FC<{developers: DeveloperForm[], searchFlag: boolean}> = (props) => {
+    const [developerIssues, setDeveloperIssues] = useState<DevelopersIssues[]>([]);
  
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const developers = DeveloperFactory.medusaTeam();
+                const developers: Developer[] = props.developers.map((developer) => {
+                    return {
+                        name: developer.name,
+                        level: getDeveloperLevelEnumFromString(developer.level),
+                        role: getDeveloperRoleEnumFromString(developer.role),
+                        skills: developer.skills.toLowerCase().split(', ') ?? []
+                    }
+                })
+
                 const data = {
                     number_issues_by_developers: 4,
                     developers: developers
@@ -71,8 +83,10 @@ const OpenAiIssuesResult: React.FC = () => {
             }
         };
  
-        fetchData();
-    }, []);
+        if (props.searchFlag) {
+            fetchData();
+        }
+    }, [props.searchFlag]);
 
     return (
         <div>

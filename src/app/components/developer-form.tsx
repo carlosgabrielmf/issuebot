@@ -1,34 +1,35 @@
 "use client";
 import React, { FormEvent, useState } from "react";
+import Button from "@mui/material/Button";
 import styles from "../page.module.css";
+import OpenAiIssuesResult from "./open-ai-issues-result";
 
-interface FormData {
+export interface Developer {
   name: string;
   level: string;
   role: string;
   skills: string;
-  issues: string;
 }
 
 const DeveloperForm: React.FC = () => {
-  const [developers, setDevelopers] = useState<FormData[]>([]);
-  const [formData, setFormData] = useState<FormData>({
+  const [search, setSearch] = useState<boolean>(false);
+
+  const [developers, setDevelopers] = useState<Developer[]>([]);
+  const [developer, setDeveloper] = useState<Developer>({
     name: "",
     level: "",
     role: "",
-    skills: "",
-    issues: "",
+    skills: ""
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setDevelopers([...developers, formData]);
-    setFormData({
+    setDevelopers([...developers, developer]);
+    setDeveloper({
       name: "",
       level: "",
       role: "",
-      skills: "",
-      issues: "",
+      skills: ""
     });
   };
 
@@ -36,11 +37,17 @@ const DeveloperForm: React.FC = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
+    setDeveloper((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
+
+  const handleOnClick = () => {
+    if (developers.length > 0) {
+      setSearch(true);
+    }
+  }
 
   return (
     <section className={styles.section}>
@@ -63,7 +70,7 @@ const DeveloperForm: React.FC = () => {
             type="text"
             id="name"
             name="name"
-            value={formData.name}
+            value={developer.name}
             onChange={handleChange}
           />
 
@@ -72,7 +79,7 @@ const DeveloperForm: React.FC = () => {
             type="text"
             id="level"
             name="level"
-            value={formData.level}
+            value={developer.level}
             onChange={handleChange}
           />
 
@@ -81,7 +88,7 @@ const DeveloperForm: React.FC = () => {
             type="text"
             id="role"
             name="role"
-            value={formData.role}
+            value={developer.role}
             onChange={handleChange}
           />
 
@@ -89,20 +96,10 @@ const DeveloperForm: React.FC = () => {
           <textarea
             id="skills"
             name="skills"
-            value={formData.skills}
+            value={developer.skills}
             onChange={handleChange}
           />
-
-          <label htmlFor="issues">Issues per Developer:</label>
-          <input
-            type="number"
-            id="issues"
-            name="issues"
-            value={formData.issues}
-            onChange={handleChange}
-          />
-
-          <button type="submit">Submit</button>
+          <button type="submit">Add developer</button>
         </form>
 
         <div className={styles.tablewrapper}>
@@ -113,7 +110,6 @@ const DeveloperForm: React.FC = () => {
                 <th>Level</th>
                 <th>Role</th>
                 <th>Skills</th>
-                <th>Issues</th>
               </tr>
             </thead>
             <tbody>
@@ -123,11 +119,14 @@ const DeveloperForm: React.FC = () => {
                   <td>{developer.level}</td>
                   <td>{developer.role}</td>
                   <td>{developer.skills}</td>
-                  <td>{developer.issues}</td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+        <div className={styles.center}>
+          <Button variant="contained" size="small" onClick={handleOnClick}>Search issues</Button>
+          <OpenAiIssuesResult developers={developers} searchFlag={search} />
         </div>
       </div>
     </section>

@@ -33,7 +33,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const question = questionBuilder.question;
     
         const resultFromOpenAi = await OpenAIApiClient.getResult(question);
-        res.status(200).json(JSON.parse(resultFromOpenAi));
+        const json = JSON.parse(resultFromOpenAi);
+        console.log(json);
+        res.status(200).json(json);
 
         // res.status(200).json(JSON.stringify([
         //     {
