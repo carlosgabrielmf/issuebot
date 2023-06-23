@@ -14,7 +14,7 @@ export class QuestionBuilder {
         const conditions = [
             `match and assign only ${String(numberOfIssuesPerDeveloper)} GitHub issues for each developer`,
             'every developer should have a different issue assigned',
-            'return only a JSON array grouping by developers objects'
+            'it is mandatory to return only a JSON array grouping by developer like "[{"developer":"developer_name","title":"title","url":"url"}]"'
         ];
         const conditionStatement = `and following conditions: "${conditions.join(', ')}" from the following GitHub issues JSON: `;
     

@@ -3,14 +3,12 @@ import React from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 import DeveloperForm from "./components/developer-form";
-import OpenAiIssuesResult from "./components/open-ai-issues-result";
 
 const Page: React.FC = () => {
   return (
     <main className={styles.main}>
       {/* this is the header */}
       <div className={styles.wrapper}>
-        <OpenAiIssuesResult />
         <div className={styles.description}>
           <h1>Hello, there.</h1>
           <h2>
@@ -53,7 +51,7 @@ const Page: React.FC = () => {
           </ul>
         </div>
       </div>
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div className={styles.formSection}>
         <Image src="/assets/3.png" alt="Bot Finding" width={350} height={350} />
         <DeveloperForm />
       </div>
